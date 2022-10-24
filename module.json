@@ -1,0 +1,55 @@
+{
+	"id": "dynamic-custom-dice",
+	"title": "Dynamic Custom Dice",
+	"description": "This module let you change the faces of the dice without need to code.",
+  
+	"version": "0.0.1",
+  
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  },
+  
+  "authors": [
+    {
+      "name": "Mestre Digital",
+      "url": "https://www.youtube.com/c/MestreDigital",
+      "flags": {}
+    }
+  ],
+  
+	"esmodules": [
+		"./scripts/main.js"
+	],
+	"styles": [],
+	"url": "https://github.com/brunocalado/dynamic-custom-dice",
+  "manifest": "https://raw.githubusercontent.com/brunocalado/dynamic-custom-dice/main/module.json",  
+  "download": "https://codeload.github.com/brunocalado/dynamic-custom-dice/zip/main"
+
+  "relationships": {
+    "requires": [
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "manifest": "https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/raw/master/module/module.json"
+      }
+    ]
+  },
+  
+  "packs": [
+    {
+      "label": "README - Dynamic Custom Dice",
+      "type": "JournalEntry",
+      "name": "readme-dynamic-custom-dice",
+      "path": "packs/readme-dynamic-custom-dice.db"
+    },
+    {
+      "label": "Macros - Dynamic Custom Dice",
+      "type": "Macro",
+      "name": "macros-dynamic-custom-dice",
+      "path": "packs/macros-dynamic-custom-dice.db"
+    }
+  ]
+  
+}
+

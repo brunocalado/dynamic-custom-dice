@@ -1,0 +1,65 @@
+<style type="text/css">
+  .tg  {border-collapse:collapse;border-spacing:0;}
+  .tg td{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    padding:2px 2px;
+    word-break:normal;
+  }
+  .tg th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-weight:normal;
+    overflow:hidden;
+    padding: 2px 2px;
+    word-break:normal;
+  }
+  .tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+</style>
+
+<h1>Instructions</h1>
+<p>This will read the selected folder for the dice images and update the settings. The world will be reloaded after that.</p>
+</br>
+
+<table>
+<thead>
+  <tr>
+    <th colspan="2">Folder Path</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><input name="folder-path" style="width:100%;" value="{{basePath}}"></td>
+    <td><button class="picker-button"><i class="fas fa-file-import fa-fw"></i></button></td>
+  </tr>
+</tbody>
+</table>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-9wq8" colspan="2">Dice Type</th>
+  </tr>
+</thead>
+<tbody>
+
+  <tr>
+    <td class="tg-9wq8">
+      <select name="select_dice_type">
+        <option value="d4" selected>D4</option>
+        <option value="d6" selected>D6</option>
+        <option value="d8">D8</option>
+        <option value="d10">D10</option>
+        <option value="d12">D12</option>
+        <option value="d20">D20</option>
+      </select>  
+    </td>
+  </tr>
+
+</tbody>
+</table>
+
+</br>
