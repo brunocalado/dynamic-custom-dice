@@ -5,8 +5,14 @@ You create the art for the dice using your image editor. After that, you just pu
 
 You just got your dice.
 
+## Features
+- Replace the label of the dice.
+- Replace the face of the dice, works well for D6.
+- Add Bump. This creates the ilusion of depth.
+- Add emision. This makes the dice emit light.
+
 # Instalation
-You can install this module with this link: 
+You can install this module with this link: https://raw.githubusercontent.com/brunocalado/dynamic-custom-dice/main/module.json
 
 # How To
 There is a journal in the compendium with full instructions. READ IT!

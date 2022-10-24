@@ -59,7 +59,17 @@ Hooks.once('i18nInit', () => {
     type: String,
     onChange: debouncedReload
   });  
-  
+
+  // call this with: game.settings.get("dynamic-custom-dice", "diceemission")
+  game.settings.register(moduleName, `diceemission`, {
+    name: "Light Color",
+    hint: "Color of the light (hexa code) emited by the dice",
+    scope: 'world',
+    config: true,
+    default: '0x00ff00',
+    type: String,
+    onChange: debouncedReload
+  });  
 });
 
 Hooks.once('diceSoNiceReady', (dice3d) => {
@@ -74,7 +84,8 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
 
     data = {
       type:"d6",
-      system:"d6SystemID"
+      system:"d6SystemID",
+      emissive: game.settings.get("dynamic-custom-dice", "diceemission")
     }
 
     if (imgs.Labels.length>0) {
@@ -98,7 +109,8 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
 
     data = {
       type:"d20",
-      system:"d20SystemID"      
+      system:"d20SystemID",
+      emissive: game.settings.get("dynamic-custom-dice", "diceemission")      
     }
 
     if (imgs.Labels.length>0) {
