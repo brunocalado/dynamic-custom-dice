@@ -24,7 +24,7 @@
 	"styles": [],
 	"url": "https://github.com/brunocalado/dynamic-custom-dice",
   "manifest": "https://raw.githubusercontent.com/brunocalado/dynamic-custom-dice/main/module.json",  
-  "download": "https://codeload.github.com/brunocalado/dynamic-custom-dice/zip/main"
+  "download": "https://codeload.github.com/brunocalado/dynamic-custom-dice/zip/main",
 
   "relationships": {
     "requires": [
