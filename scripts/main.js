@@ -80,7 +80,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
   if ( game.settings.get("dynamic-custom-dice", "d6jsondata")!='' ) {
     dice3d.addSystem({id: "d6SystemID", name: game.settings.get("dynamic-custom-dice", "d6settingname") }, false);
     imgs = JSON.parse( game.settings.get("dynamic-custom-dice", "d6jsondata") );
-console.log(imgs)
+
     data = {
       type:"d6",
       system:"d6SystemID"
