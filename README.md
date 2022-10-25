@@ -24,7 +24,7 @@ There is a journal in the compendium with full instructions. READ IT!
 You can see changes at [CHANGELOG](CHANGELOG.md).
 
 # License
-[LICENSE](https://github.com/brunocalado/dynamic-custom-dice/blob/main/LICENSE)
+[LICENSE](https://github.com/brunocalado/dynamic-custom-dice/blob/main/LICENSE.md)
 
 # Assets License
-[LICENSE](https://github.com/brunocalado/dynamic-custom-dice/blob/main/LICENSE-ASSETS)
+[LICENSE](https://github.com/brunocalado/dynamic-custom-dice/blob/main/LICENSE-ASSETS.md)
