@@ -58,7 +58,7 @@ Hooks.once('i18nInit', () => {
     default: 'My Custom D20',
     type: String,
     onChange: debouncedReload
-  });  
+  });
 
   // call this with: game.settings.get("dynamic-custom-dice", "diceemission")
   game.settings.register(moduleName, `diceemission`, {
@@ -67,8 +67,7 @@ Hooks.once('i18nInit', () => {
     scope: 'world',
     config: true,
     default: '0x00ff00',
-    type: String,
-    onChange: debouncedReload
+    type: String
   });  
 });
 
@@ -81,11 +80,10 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
   if ( game.settings.get("dynamic-custom-dice", "d6jsondata")!='' ) {
     dice3d.addSystem({id: "d6SystemID", name: game.settings.get("dynamic-custom-dice", "d6settingname") }, false);
     imgs = JSON.parse( game.settings.get("dynamic-custom-dice", "d6jsondata") );
-
+console.log(imgs)
     data = {
       type:"d6",
-      system:"d6SystemID",
-      emissive: game.settings.get("dynamic-custom-dice", "diceemission")
+      system:"d6SystemID"
     }
 
     if (imgs.Labels.length>0) {
@@ -96,6 +94,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
     }
     if (imgs.Emissive.length>0) {
       data.emissiveMaps = imgs.Emissive;
+      data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");
     } 
 
     dice3d.addDicePreset(data);
@@ -106,11 +105,10 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
   if ( game.settings.get("dynamic-custom-dice", "d20jsondata")!='' ) {
     dice3d.addSystem({id: "d20SystemID", name: game.settings.get("dynamic-custom-dice", "d20settingname") }, false);
     imgs = JSON.parse( game.settings.get("dynamic-custom-dice", "d20jsondata") );
-
+    
     data = {
       type:"d20",
-      system:"d20SystemID",
-      emissive: game.settings.get("dynamic-custom-dice", "diceemission")      
+      system:"d20SystemID"      
     }
 
     if (imgs.Labels.length>0) {
@@ -121,6 +119,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
     }
     if (imgs.Emissive.length>0) {
       data.emissiveMaps = imgs.Emissive;
+      data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");      
     } 
 
     dice3d.addDicePreset(data);

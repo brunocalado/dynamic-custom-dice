@@ -3,7 +3,7 @@
 	"title": "Dynamic Custom Dice",
 	"description": "This module let you change the faces of the dice without need to code.",
   
-	"version": "0.0.1",
+	"version": "0.0.2",
   
   "compatibility": {
     "minimum": "10",

@@ -10,7 +10,7 @@ export class common {
   }
   
   // ---------------------------------------------------------
-  // test
+  // This will read the images in a folder and create an Object.
   static async diceImagesParser(folderName) {
     let imgs = {}; 
     imgs.Labels = [];
