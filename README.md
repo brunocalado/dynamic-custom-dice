@@ -6,7 +6,7 @@ You create the art for the dice using your image editor. After that, you just pu
 You just got your dice.
 
 <p align="center">
-  <img width="700" src="docs/docs_demo.webp">
+  <img width="900" src="docs/docs_demo.webp">
 </p>
 
 ## Features

@@ -15,9 +15,9 @@ Hooks.once('i18nInit', () => {
   const debouncedReload = debounce(() => location.reload(), 1000); // RELOAD AFTER CHANGE
 
   // Data --------------------------------------------------------------
-  // call this with: game.settings.get("dynamic-custom-dice", "d20jsondata")
-  game.settings.register(moduleName, `d20jsondata`, {
-    name: "D20 Data",
+  // call this with: game.settings.get("dynamic-custom-dice", "d4jsondata")
+  game.settings.register(moduleName, `d4jsondata`, {
+    name: "D4 Data",
     hint: "This should be a valid json with the images data, use the macro to auto set this. Changing this settings will reload the world.",
     scope: 'world',
     config: false,
@@ -25,7 +25,7 @@ Hooks.once('i18nInit', () => {
     type: String,
     onChange: debouncedReload
   });
-
+  
   // call this with: game.settings.get("dynamic-custom-dice", "d6jsondata")
   game.settings.register(moduleName, `d6jsondata`, {
     name: "D6 Data",
@@ -37,7 +37,51 @@ Hooks.once('i18nInit', () => {
     onChange: debouncedReload
   });
   
-  // Optons --------------------------------------------------------------
+  // call this with: game.settings.get("dynamic-custom-dice", "d8jsondata")
+  game.settings.register(moduleName, `d8jsondata`, {
+    name: "D8 Data",
+    hint: "This should be a valid json with the images data, use the macro to auto set this. Changing this settings will reload the world.",
+    scope: 'world',
+    config: false,
+    default: '',
+    type: String,
+    onChange: debouncedReload
+  });
+
+  // call this with: game.settings.get("dynamic-custom-dice", "d10jsondata")
+  game.settings.register(moduleName, `d10jsondata`, {
+    name: "D10 Data",
+    hint: "This should be a valid json with the images data, use the macro to auto set this. Changing this settings will reload the world.",
+    scope: 'world',
+    config: false,
+    default: '',
+    type: String,
+    onChange: debouncedReload
+  });
+  
+  // call this with: game.settings.get("dynamic-custom-dice", "d12jsondata")
+  game.settings.register(moduleName, `d12jsondata`, {
+    name: "D12 Data",
+    hint: "This should be a valid json with the images data, use the macro to auto set this. Changing this settings will reload the world.",
+    scope: 'world',
+    config: false,
+    default: '',
+    type: String,
+    onChange: debouncedReload
+  });
+  
+  // call this with: game.settings.get("dynamic-custom-dice", "d20jsondata")
+  game.settings.register(moduleName, `d20jsondata`, {
+    name: "D20 Data",
+    hint: "This should be a valid json with the images data, use the macro to auto set this. Changing this settings will reload the world.",
+    scope: 'world',
+    config: false,
+    default: '',
+    type: String,
+    onChange: debouncedReload
+  });
+  
+  // Options --------------------------------------------------------------
   // call this with: game.settings.get("dynamic-custom-dice", "d6settingname")
   game.settings.register(moduleName, `d6settingname`, {
     name: "D6 Name",
@@ -45,6 +89,17 @@ Hooks.once('i18nInit', () => {
     scope: 'world',
     config: true,
     default: 'My Custom D6',
+    type: String,
+    onChange: debouncedReload
+  });
+
+  // call this with: game.settings.get("dynamic-custom-dice", "d8settingname")
+  game.settings.register(moduleName, `d8settingname`, {
+    name: "D8 Name",
+    hint: "This is the name of the dice that shows in Dice So Nice Settings. Changing this settings will reload the world.",
+    scope: 'world',
+    config: true,
+    default: 'My Custom D8',
     type: String,
     onChange: debouncedReload
   });
@@ -72,28 +127,37 @@ Hooks.once('i18nInit', () => {
 });
 
 Hooks.once('diceSoNiceReady', (dice3d) => {
-  let imgs;
+  let importedData;
   let data;
   
   // ---------------------------------------------------------
   // d6
   if ( game.settings.get("dynamic-custom-dice", "d6jsondata")!='' ) {
     dice3d.addSystem({id: "d6SystemID", name: game.settings.get("dynamic-custom-dice", "d6settingname") }, false);
-    imgs = JSON.parse( game.settings.get("dynamic-custom-dice", "d6jsondata") );
+    importedData = JSON.parse( game.settings.get("dynamic-custom-dice", "d6jsondata") );
 
-    data = {
-      type:"d6",
-      system:"d6SystemID"
-    }
+    data = importedData;
+    data.type = "d6";
+    data.system = "d6SystemID";
 
-    if (imgs.Labels.length>0) {
-      data.labels = imgs.Labels;
-    }
-    if (imgs.Bumps.length>0) {
-      data.bumpMaps = imgs.Bumps;
-    }
-    if (imgs.Emissive.length>0) {
-      data.emissiveMaps = imgs.Emissive;
+    if (data.emissiveMaps) {
+      data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");
+    } 
+
+    dice3d.addDicePreset(data);
+  }
+
+  // ---------------------------------------------------------
+  // d8
+  if ( game.settings.get("dynamic-custom-dice", "d8jsondata")!='' ) {
+    dice3d.addSystem({id: "d8SystemID", name: game.settings.get("dynamic-custom-dice", "d8settingname") }, false);
+    importedData = JSON.parse( game.settings.get("dynamic-custom-dice", "d8jsondata") );
+    
+    data = importedData;
+    data.type = "d8";
+    data.system = "d8SystemID";
+
+    if (data.emissiveMaps) {
       data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");
     } 
 
@@ -104,25 +168,17 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
   // d20
   if ( game.settings.get("dynamic-custom-dice", "d20jsondata")!='' ) {
     dice3d.addSystem({id: "d20SystemID", name: game.settings.get("dynamic-custom-dice", "d20settingname") }, false);
-    imgs = JSON.parse( game.settings.get("dynamic-custom-dice", "d20jsondata") );
+    importedData = JSON.parse( game.settings.get("dynamic-custom-dice", "d20jsondata") );
     
-    data = {
-      type:"d20",
-      system:"d20SystemID"      
-    }
+    data = importedData;
+    data.type = "d20";
+    data.system = "d20SystemID";
 
-    if (imgs.Labels.length>0) {
-      data.labels = imgs.Labels;
-    }
-    if (imgs.Bumps.length>0) {
-      data.bumpMaps = imgs.Bumps;
-    }
-    if (imgs.Emissive.length>0) {
-      data.emissiveMaps = imgs.Emissive;
-      data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");      
+    if (data.emissiveMaps) {
+      data.emissive = game.settings.get("dynamic-custom-dice", "diceemission");
     } 
 
     dice3d.addDicePreset(data);
   }
- 
+
 });

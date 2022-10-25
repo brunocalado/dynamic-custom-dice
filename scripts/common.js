@@ -11,34 +11,46 @@ export class common {
   
   // ---------------------------------------------------------
   // This will read the images in a folder and create an Object.
-  static async diceImagesParser(folderName) {
-    let imgs = {}; 
-    imgs.Labels = [];
-    imgs.Bumps = [];
-    imgs.Emissive = [];
+  static async diceImagesParser(folderName, diceType) {
+    const diceSides = parseInt( diceType.replace('d','') );
+    let data = {}; 
     
     let {files} = await FilePicker.browse("data", folderName);
-    
+
     for (let imagePath of files) {
       const fileName = this.splitPath(imagePath).split('_');
-      const side = fileName[0];
+      const sideNumber = parseInt(fileName[0], 10);
       const imageType = fileName[1];
         
       if (imageType=='label') {
-        imgs.Labels.push(imagePath);
+        if (!data.labels) {
+          data.labels = [];
+        }
+        data.labels.push(imagePath);
       }
       if (imageType=='bump') {
-        imgs.Bumps.push(imagePath);
+        if (!data.bumpMaps) {
+          const arr = new Array(diceSides).fill(null);
+          data.bumpMaps = arr;          
+        }        
+        data.bumpMaps[sideNumber-1] = imagePath;
       }
       if (imageType=='emission') {
-        imgs.Emissive.push(imagePath);
+        if (!data.emissiveMaps) {
+          const arr = new Array(diceSides).fill(null);
+          data.emissiveMaps = arr;
+        }        
+        data.emissiveMaps[sideNumber-1] = imagePath;
       }      
       if (imageType=='dummy') {
-        imgs.Labels.push(side);
+        if (!data.labels) {
+          data.labels = [];
+        }        
+        data.labels.push( sideNumber.toString() );
       }       
     }
 
-    return imgs;    
+    return data;    
   }
 
   static async readFolder() {
@@ -55,23 +67,14 @@ export class common {
           callback: async (html) => {
             const folderPath = html.find("input[name=folder-path]").val();  
             const diceType = html.find("select[name=select_dice_type]").val();  
-            const imgs = await this.diceImagesParser(folderPath);
+            const imgs = await this.diceImagesParser(folderPath, diceType);
             
             switch(diceType) {
-              case 'd4':
-                game.settings.set("dynamic-custom-dice", "d4jsondata", JSON.stringify(imgs));
-                break;
               case 'd6':
                 game.settings.set("dynamic-custom-dice", "d6jsondata", JSON.stringify(imgs));
                 break;
               case 'd8':
                 game.settings.set("dynamic-custom-dice", "d8jsondata", JSON.stringify(imgs));
-                break;
-              case 'd10':
-                game.settings.set("dynamic-custom-dice", "d10jsondata", JSON.stringify(imgs));
-                break;
-              case 'd12':
-                game.settings.set("dynamic-custom-dice", "d12jsondata", JSON.stringify(imgs));
                 break;
               case 'd20':
                 game.settings.set("dynamic-custom-dice", "d20jsondata", JSON.stringify(imgs));
@@ -104,7 +107,12 @@ export class common {
   // test
   static debug() {
     console.log("DEBUG=========================");
-    console.log( game.settings.get("dynamic-custom-dice", "d6jsondata") );
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d4jsondata")));  
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d6jsondata")));
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d8jsondata")));
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d10jsondata")));
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d12jsondata")));      
+    console.log(JSON.parse(game.settings.get( "dynamic-custom-dice", "d20jsondata"))); 
     console.log("==============================");
   } 
 }
